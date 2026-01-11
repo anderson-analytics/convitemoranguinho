@@ -337,7 +337,7 @@
 
 <body>
   <!-- Música de fundo -->
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop autoplay>
     <source src="./musica/musica.mp3" type="audio/mpeg">
   </audio>
 
@@ -465,6 +465,7 @@
     const musicControl = document.getElementById("musicControl");
     const musicIcon = musicControl.querySelector(".music-icon");
     let isPlaying = false;
+    let hasInteracted = false;
 
     // Tentar tocar automaticamente
     function tryPlayMusic(){
@@ -481,8 +482,25 @@
         });
     }
 
+    // Iniciar música na primeira interação do usuário
+    function startOnInteraction(){
+      if(!hasInteracted && !isPlaying){
+        hasInteracted = true;
+        tryPlayMusic();
+        document.removeEventListener("click", startOnInteraction);
+        document.removeEventListener("touchstart", startOnInteraction);
+        document.removeEventListener("keydown", startOnInteraction);
+      }
+    }
+
+    // Adicionar listeners para primeira interação
+    document.addEventListener("click", startOnInteraction);
+    document.addEventListener("touchstart", startOnInteraction);
+    document.addEventListener("keydown", startOnInteraction);
+
     // Controle play/pause
-    musicControl.addEventListener("click", () => {
+    musicControl.addEventListener("click", (e) => {
+      e.stopPropagation();
       if(isPlaying){
         bgMusic.pause();
         musicIcon.textContent = "🔇";
@@ -496,8 +514,11 @@
       }
     });
 
-    // Tentar tocar música ao carregar
-    setTimeout(tryPlayMusic, 500);
+    // Tentar tocar música imediatamente e após carregar
+    tryPlayMusic();
+    window.addEventListener("load", () => {
+      setTimeout(tryPlayMusic, 100);
+    });
   </script>
 </body>
 </html>
