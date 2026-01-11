@@ -1,0 +1,15 @@
+# Claude
+.claude/
+
+# Arquivos temporários
+nul
+*.tmp
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos antigos (se houver)
+script.js
+styles.css

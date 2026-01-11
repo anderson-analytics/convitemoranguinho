@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Informações Importantes • Aniversário</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./images/morango.png">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#ff3974;
+      --pink-light:#ff6b9d;
+      --pink-bg:#ffe8f0;
+      --red:#e91e63;
+      --green:#4caf50;
+      --green-dark:#2e7d32;
+      --white:#ffffff;
+      --cream:#fff8dc;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html,body{
+      height:100%;
+      width:100%;
+      overflow-x:hidden;
+    }
+
+    body{
+      font-family: "Quicksand", sans-serif;
+      color:#333;
+      background: linear-gradient(135deg, #ffe8f0 0%, #fff0f5 50%, #ffe8f0 100%);
+      position:relative;
+      overflow-y:auto;
+    }
+
+    /* Morangos flutuando */
+    .strawberry-float{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+
+    .strawberry{
+      position:absolute;
+      animation: float-up var(--duration) linear infinite;
+      opacity:0.7;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    @keyframes float-up{
+      0%{
+        transform: translateY(110vh) rotate(0deg);
+        opacity:0;
+      }
+      10%{
+        opacity:0.7;
+      }
+      90%{
+        opacity:0.7;
+      }
+      100%{
+        transform: translateY(-20vh) rotate(360deg);
+        opacity:0;
+      }
+    }
+
+    /* Container principal */
+    .container{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:20px 16px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Card */
+    .card{
+      width:100%;
+      max-width:500px;
+      background:#ffffff;
+      border-radius:30px;
+      box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
+      overflow:hidden;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp{
+      from{
+        opacity:0;
+        transform: translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header */
+    .header{
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      padding:30px 20px 20px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .header::before{
+      content:'';
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      right:0;
+      height:20px;
+      background: radial-gradient(circle at 10px -5px, transparent 12px, white 13px);
+      background-size:40px 20px;
+      background-repeat:repeat-x;
+    }
+
+    .header-icon{
+      font-size:60px;
+      margin-bottom:12px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce{
+      0%, 100%{
+        transform: translateY(0);
+      }
+      50%{
+        transform: translateY(-10px);
+      }
+    }
+
+    .title{
+      font-family: "Chewy", cursive;
+      font-size:32px;
+      color:white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+      margin:0;
+      line-height:1.2;
+    }
+
+    /* Conteúdo */
+    .content{
+      padding:30px 24px 24px;
+    }
+
+    .intro{
+      text-align:center;
+      font-size:16px;
+      color:#666;
+      margin-bottom:24px;
+      line-height:1.5;
+    }
+
+    /* Card de informação */
+    .info-card{
+      background: linear-gradient(135deg, var(--pink-bg) 0%, #fff 100%);
+      border-radius:20px;
+      padding:18px 20px;
+      margin-bottom:16px;
+      border:2px solid var(--pink-light);
+      box-shadow: 0 8px 20px rgba(233, 30, 99, 0.1);
+    }
+
+    .info-card .icon{
+      font-size:32px;
+      margin-bottom:10px;
+      display:block;
+    }
+
+    .info-card h3{
+      font-family: "Chewy", cursive;
+      color:var(--red);
+      font-size:20px;
+      margin-bottom:8px;
+    }
+
+    .info-card p{
+      font-size:15px;
+      line-height:1.6;
+      color:#555;
+    }
+
+    .info-card strong{
+      color:var(--red);
+      font-weight:700;
+    }
+
+    /* Destaque especial */
+    .highlight{
+      background: linear-gradient(135deg, #fff8e1 0%, #fff9c4 100%);
+      border:2px dashed var(--pink);
+    }
+
+    .highlight h3{
+      color:#d97706;
+    }
+
+    /* Botão voltar */
+    .btn-back{
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      color:white;
+      border:none;
+      border-radius:18px;
+      padding:16px 24px;
+      font-family: "Quicksand", sans-serif;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform 0.2s;
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:100%;
+      margin-top:20px;
+    }
+
+    .btn-back:active{
+      transform: scale(0.95);
+    }
+
+    /* Controle de Música */
+    .music-control{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      border:none;
+      cursor:pointer;
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-music 2s ease-in-out infinite;
+    }
+
+    .music-control:hover{
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(233, 30, 99, 0.5);
+    }
+
+    .music-control:active{
+      transform: scale(0.95);
+    }
+
+    .music-control.paused{
+      background: linear-gradient(135deg, #999 0%, #666 100%);
+      animation: none;
+    }
+
+    .music-icon{
+      font-size:24px;
+    }
+
+    @keyframes pulse-music{
+      0%, 100%{
+        box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+      }
+      50%{
+        box-shadow: 0 6px 28px rgba(233, 30, 99, 0.6);
+      }
+    }
+
+    /* Personagem Moranguinho */
+    .character{
+      text-align:center;
+      margin:20px 0;
+    }
+
+    .character-img{
+      width:100%;
+      max-width:200px;
+      height:auto;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(233, 30, 99, 0.2));
+    }
+
+    @keyframes float{
+      0%, 100%{
+        transform: translateY(0px);
+      }
+      50%{
+        transform: translateY(-15px);
+      }
+    }
+
+    /* Footer */
+    .footer{
+      text-align:center;
+      font-size:14px;
+      color:#999;
+      margin-top:20px;
+    }
+
+    .decoration{
+      text-align:center;
+      font-size:24px;
+      margin:16px 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse{
+      0%, 100%{
+        transform: scale(1);
+      }
+      50%{
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Música de fundo -->
+  <audio id="bgMusic" loop>
+    <source src="./musica/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Controle de música -->
+  <button class="music-control" id="musicControl" aria-label="Controlar música">
+    <span class="music-icon">🔊</span>
+  </button>
+
+  <!-- Morangos flutuando -->
+  <div class="strawberry-float" id="strawberries"></div>
+
+  <!-- Container principal -->
+  <div class="container">
+    <div class="card">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-icon">ℹ️</div>
+        <h1 class="title">Informações Importantes</h1>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="content">
+        <p class="intro">
+          Por favor, leia com atenção as informações abaixo para que tudo saia perfeito! 🍓
+        </p>
+
+        <!-- Info 1 -->
+        <div class="info-card">
+          <span class="icon">👥</span>
+          <h3>Convite Individual</h3>
+          <p>Este convite é <strong>pessoal e intransferível</strong>. Por favor, não traga acompanhantes sem confirmar conosco antes.</p>
+        </div>
+
+        <!-- Info 2 -->
+        <div class="info-card">
+          <span class="icon">🎁</span>
+          <h3>Sugestão de Presentes</h3>
+          <p>Dê preferência a presentes que <strong>não sejam brinquedos</strong>, como roupas, acessórios, calçados e outros itens úteis. Sua presença já é o maior presente! 💕</p>
+        </div>
+
+        <!-- Info 3 -->
+        <div class="info-card">
+          <span class="icon">🍺</span>
+          <h3>Bebidas Alcoólicas</h3>
+          <p><strong>Não teremos bebidas alcoólicas</strong> disponíveis na festa. Se você deseja consumir, fique à vontade para levar a sua! 🥤</p>
+        </div>
+
+        <!-- Info 4 - Destaque -->
+        <div class="info-card highlight">
+          <span class="icon">🏊‍♀️</span>
+          <h3>Horário da Piscina</h3>
+          <p>A piscina estará <strong>liberada das 16:30 até às 22:00h</strong>. Não esqueça de trazer sua roupa de banho, toalha e protetor solar! ☀️</p>
+        </div>
+
+        <!-- Imagem Moranguinho -->
+        <div class="character">
+          <img src="./images/moranguinho.png" alt="Moranguinho" class="character-img">
+        </div>
+
+        <!-- Decoração -->
+        <div class="decoration">🍓 🌸 🍓</div>
+
+        <!-- Botão voltar -->
+        <button class="btn-back" onclick="window.location.href='index.html'">
+          ← Voltar ao Convite
+        </button>
+
+        <div class="footer">
+          Nos vemos na festa! 💕
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * ========= MORANGOS FLUTUANDO =========
+     */
+    function createStrawberry(){
+      const svg = `
+        <svg width="40" height="40" viewBox="0 0 64 64">
+          <defs>
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+          <path d="M32 12c10 0 18 8 18 18 0 18-18 32-18 32S14 48 14 30c0-10 8-18 18-18z"
+                fill="#ff3974" filter="url(#shadow)"/>
+          <path d="M22 14c8 8 18 8 26 0" stroke="#4caf50" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="24" cy="34" r="2" fill="#ffe7b8"/>
+          <circle cx="34" cy="40" r="2" fill="#ffe7b8"/>
+          <circle cx="40" cy="30" r="2" fill="#ffe7b8"/>
+        </svg>
+      `;
+
+      const div = document.createElement("div");
+      div.className = "strawberry";
+      div.innerHTML = svg;
+
+      div.style.left = Math.random() * 100 + "%";
+      const duration = 8 + Math.random() * 7;
+      div.style.setProperty("--duration", duration + "s");
+      div.style.animationDelay = -Math.random() * duration + "s";
+      const scale = 0.6 + Math.random() * 0.6;
+      div.style.transform = `scale(${scale})`;
+
+      return div;
+    }
+
+    function spawnStrawberries(){
+      const container = document.getElementById("strawberries");
+      const count = 12;
+
+      for(let i = 0; i < count; i++){
+        container.appendChild(createStrawberry());
+      }
+    }
+
+    spawnStrawberries();
+
+    /**
+     * ========= MÚSICA DE FUNDO =========
+     */
+    const bgMusic = document.getElementById("bgMusic");
+    const musicControl = document.getElementById("musicControl");
+    const musicIcon = musicControl.querySelector(".music-icon");
+    let isPlaying = false;
+
+    // Tentar tocar automaticamente
+    function tryPlayMusic(){
+      bgMusic.play()
+        .then(() => {
+          isPlaying = true;
+          musicIcon.textContent = "🔊";
+          musicControl.classList.remove("paused");
+        })
+        .catch(() => {
+          isPlaying = false;
+          musicIcon.textContent = "🔇";
+          musicControl.classList.add("paused");
+        });
+    }
+
+    // Controle play/pause
+    musicControl.addEventListener("click", () => {
+      if(isPlaying){
+        bgMusic.pause();
+        musicIcon.textContent = "🔇";
+        musicControl.classList.add("paused");
+        isPlaying = false;
+      }else{
+        bgMusic.play();
+        musicIcon.textContent = "🔊";
+        musicControl.classList.remove("paused");
+        isPlaying = true;
+      }
+    });
+
+    // Tentar tocar música ao carregar
+    setTimeout(tryPlayMusic, 500);
+  </script>
+</body>
+</html>

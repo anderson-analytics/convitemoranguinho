@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Convite • Aniversário</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./images/morango.png">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#ff3974;
+      --pink-light:#ff6b9d;
+      --pink-bg:#ffe8f0;
+      --red:#e91e63;
+      --green:#4caf50;
+      --green-dark:#2e7d32;
+      --white:#ffffff;
+      --cream:#fff8dc;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html,body{
+      height:100%;
+      width:100%;
+      overflow-x:hidden;
+    }
+
+    body{
+      font-family: "Quicksand", sans-serif;
+      color:#333;
+      background: linear-gradient(135deg, #ffe8f0 0%, #fff0f5 50%, #ffe8f0 100%);
+      position:relative;
+      overflow-y:auto;
+    }
+
+    /* Morangos flutuando - ANIMAÇÃO DE SUBIR */
+    .strawberry-float{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+
+    .strawberry{
+      position:absolute;
+      animation: float-up var(--duration) linear infinite;
+      opacity:0.7;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    @keyframes float-up{
+      0%{
+        transform: translateY(110vh) rotate(0deg);
+        opacity:0;
+      }
+      10%{
+        opacity:0.7;
+      }
+      90%{
+        opacity:0.7;
+      }
+      100%{
+        transform: translateY(-20vh) rotate(360deg);
+        opacity:0;
+      }
+    }
+
+    /* Container principal */
+    .container{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:20px 16px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Card do convite */
+    .card{
+      width:100%;
+      max-width:400px;
+      background:#ffffff;
+      border-radius:30px;
+      box-shadow: 0 20px 60px rgba(233, 30, 99, 0.2);
+      overflow:hidden;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp{
+      from{
+        opacity:0;
+        transform: translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Header com decoração */
+    .header{
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      padding:24px 20px 20px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .header::before{
+      content:'';
+      position:absolute;
+      bottom:-2px;
+      left:0;
+      right:0;
+      height:20px;
+      background: radial-gradient(circle at 10px -5px, transparent 12px, white 13px);
+      background-size:40px 20px;
+      background-repeat:repeat-x;
+    }
+
+    .header-icon{
+      font-size:50px;
+      margin-bottom:8px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce{
+      0%, 100%{
+        transform: translateY(0);
+      }
+      50%{
+        transform: translateY(-10px);
+      }
+    }
+
+    .title{
+      font-family: "Chewy", cursive;
+      font-size:38px;
+      color:white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+      margin:0;
+      line-height:1;
+    }
+
+    .subtitle{
+      font-family: "Chewy", cursive;
+      font-size:22px;
+      color:var(--cream);
+      margin-top:6px;
+    }
+
+    /* Conteúdo */
+    .content{
+      padding:24px 20px 20px;
+    }
+
+    .message{
+      text-align:center;
+      font-size:16px;
+      line-height:1.5;
+      color:#555;
+      margin-bottom:20px;
+    }
+
+    .message strong{
+      color:var(--red);
+      font-weight:700;
+    }
+
+    /* Info boxes */
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .info-box{
+      background:var(--pink-bg);
+      border-radius:18px;
+      padding:14px 10px;
+      text-align:center;
+      border:2px solid var(--pink-light);
+    }
+
+    .info-box .emoji{
+      font-size:24px;
+      display:block;
+      margin-bottom:6px;
+    }
+
+    .info-box .label{
+      font-size:12px;
+      color:#666;
+      margin-bottom:4px;
+      font-weight:600;
+    }
+
+    .info-box .value{
+      font-family: "Chewy", cursive;
+      font-size:16px;
+      color:var(--red);
+      line-height:1.2;
+    }
+
+    /* Local */
+    .location{
+      background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:16px;
+      border:2px solid var(--green);
+    }
+
+    .location h3{
+      font-family: "Chewy", cursive;
+      color:var(--green-dark);
+      font-size:18px;
+      margin-bottom:8px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .location p{
+      font-size:14px;
+      color:#555;
+      line-height:1.4;
+      margin:4px 0;
+    }
+
+    .location strong{
+      color:var(--green-dark);
+      font-weight:700;
+    }
+
+    /* Botões */
+    .buttons{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .btn{
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      color:white;
+      border:none;
+      border-radius:16px;
+      padding:14px 12px;
+      font-family: "Quicksand", sans-serif;
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+    }
+
+    .btn:active{
+      transform: scale(0.95);
+    }
+
+    .btn-primary{
+      background: linear-gradient(135deg, var(--red) 0%, var(--pink) 100%);
+      font-size:16px;
+      padding:16px;
+    }
+
+    .btn-green{
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+    }
+
+    /* Countdown */
+    .countdown{
+      background: linear-gradient(135deg, #fff8e1 0%, #fff9c4 100%);
+      border-radius:18px;
+      padding:14px;
+      border:2px dashed var(--pink-light);
+      margin-bottom:16px;
+    }
+
+    .countdown h4{
+      font-family: "Chewy", cursive;
+      color:var(--red);
+      font-size:16px;
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    .countdown-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:8px;
+    }
+
+    .countdown-box{
+      background:white;
+      border-radius:12px;
+      padding:8px 4px;
+      text-align:center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .countdown-box .num{
+      font-family: "Chewy", cursive;
+      font-size:22px;
+      color:var(--red);
+      line-height:1;
+    }
+
+    .countdown-box .unit{
+      font-size:10px;
+      color:#888;
+      margin-top:4px;
+      font-weight:600;
+    }
+
+    /* Footer */
+    .footer{
+      text-align:center;
+      font-size:13px;
+      color:#999;
+      padding-bottom:10px;
+    }
+
+    /* Controle de Música */
+    .music-control{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+      border:none;
+      cursor:pointer;
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+      z-index:1000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-music 2s ease-in-out infinite;
+    }
+
+    .music-control:hover{
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(233, 30, 99, 0.5);
+    }
+
+    .music-control:active{
+      transform: scale(0.95);
+    }
+
+    .music-control.paused{
+      background: linear-gradient(135deg, #999 0%, #666 100%);
+      animation: none;
+    }
+
+    .music-icon{
+      font-size:24px;
+    }
+
+    @keyframes pulse-music{
+      0%, 100%{
+        box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+      }
+      50%{
+        box-shadow: 0 6px 28px rgba(233, 30, 99, 0.6);
+      }
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform: translateX(-50%);
+      background:rgba(0,0,0,0.85);
+      color:white;
+      padding:12px 24px;
+      border-radius:25px;
+      font-size:14px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.3s;
+      z-index:1000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .toast.show{
+      opacity:1;
+    }
+
+    /* Personagem Moranguinho */
+    .character{
+      text-align:center;
+      margin:20px 0;
+    }
+
+    .character-img{
+      width:100%;
+      max-width:250px;
+      height:auto;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(233, 30, 99, 0.2));
+    }
+
+    @keyframes float{
+      0%, 100%{
+        transform: translateY(0px);
+      }
+      50%{
+        transform: translateY(-15px);
+      }
+    }
+
+    /* Decoração extra */
+    .decoration{
+      text-align:center;
+      font-size:24px;
+      margin:10px 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse{
+      0%, 100%{
+        transform: scale(1);
+      }
+      50%{
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Música de fundo -->
+  <audio id="bgMusic" loop>
+    <source src="./musica/musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Controle de música -->
+  <button class="music-control" id="musicControl" aria-label="Controlar música">
+    <span class="music-icon">🔊</span>
+  </button>
+
+  <!-- Morangos flutuando -->
+  <div class="strawberry-float" id="strawberries"></div>
+
+  <!-- Container principal -->
+  <div class="container">
+    <div class="card">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-icon">🍓</div>
+        <h1 class="title" id="nome">Maria Liz</h1>
+        <div class="subtitle"><span id="idade">2</span> aninhos!</div>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="content">
+        <p class="message">
+          Tem cheirinho de festa no ar! 🎉<br/>
+          Venha comemorar comigo o meu <strong id="niverTxt">2º</strong> aniversário!
+        </p>
+
+        <!-- Info grid -->
+        <div class="info-grid">
+          <div class="info-box">
+            <span class="emoji">📅</span>
+            <div class="label">Data</div>
+            <div class="value">
+              <span id="dia">29</span> <span id="mes">Mar</span>
+            </div>
+          </div>
+          <div class="info-box">
+            <span class="emoji">⏰</span>
+            <div class="label">Horário</div>
+            <div class="value" id="hora">17:30</div>
+          </div>
+        </div>
+
+        <!-- Local -->
+        <div class="location">
+          <h3>📍 Local</h3>
+          <p><strong id="localNome">Buffet Infantil</strong></p>
+          <p id="endereco">Rua Exemplo, 123 - Bairro</p>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown">
+          <h4>⏳ Falta pouco!</h4>
+          <div class="countdown-grid">
+            <div class="countdown-box">
+              <div class="num" id="dd">00</div>
+              <div class="unit">dias</div>
+            </div>
+            <div class="countdown-box">
+              <div class="num" id="hh">00</div>
+              <div class="unit">hrs</div>
+            </div>
+            <div class="countdown-box">
+              <div class="num" id="mm">00</div>
+              <div class="unit">min</div>
+            </div>
+            <div class="countdown-box">
+              <div class="num" id="ss">00</div>
+              <div class="unit">seg</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botões -->
+        <div class="buttons">
+          <button class="btn btn-primary" id="btnRsvp">
+            💬 Confirmar Presença
+          </button>
+          <button class="btn btn-green" id="btnInfo">
+            ℹ️ Informações Importantes
+          </button>
+        </div>
+
+        <!-- Imagem Moranguinho -->
+        <div class="character">
+          <img src="./images/moranguinho.png" alt="Moranguinho" class="character-img">
+        </div>
+
+        <!-- Decoração -->
+        <div class="decoration">🍓 🌸 🍓</div>
+
+        <!-- Footer -->
+        <div class="footer">
+          Te espero pra comemorar! 💕
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /**
+     * ========= CONFIGURAÇÕES DO CONVITE =========
+     */
+    const convite = {
+      nome: "Maria Liz",
+      idade: 2,
+      dataEvento: new Date(2026, 2, 7, 16, 30, 0), // Ano, Mês-1, Dia, Hora, Min
+
+      dia: "07",
+      mes: "Mar",
+      horaTexto: "16:30",
+
+      localNome: "Piscina do Léo outra já é caixa d'água",
+      endereco: "Endereço da piscina",
+
+      // WhatsApp (com DDI +55 e DDD)
+      whatsappNumero: "5599999999999",
+      whatsappMensagem: "Olá, eu recebi seu convite e ficarei feliz em participar. Pode contar comigo para a festinha da Maria Liz. Obrigado! 🍓"
+    };
+
+    /**
+     * ========= FUNÇÕES AUXILIARES =========
+     */
+    const $ = (sel) => document.querySelector(sel);
+    const pad2 = (n) => String(n).padStart(2, "0");
+
+    function toast(msg){
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      setTimeout(()=> el.classList.remove("show"), 2500);
+    }
+
+    function ordinalPt(num){
+      return `${num}º`;
+    }
+
+    /**
+     * ========= INICIALIZAR TEXTO =========
+     */
+    function setText(){
+      $("#nome").textContent = convite.nome;
+      $("#idade").textContent = convite.idade;
+      $("#niverTxt").textContent = ordinalPt(convite.idade);
+      $("#dia").textContent = convite.dia;
+      $("#mes").textContent = convite.mes;
+      $("#hora").textContent = convite.horaTexto;
+      $("#localNome").textContent = convite.localNome;
+      $("#endereco").textContent = convite.endereco;
+    }
+
+    /**
+     * ========= CONTAGEM REGRESSIVA =========
+     */
+    function tick(){
+      const now = new Date();
+      let diff = convite.dataEvento.getTime() - now.getTime();
+
+      if(diff <= 0){
+        $("#dd").textContent = "00";
+        $("#hh").textContent = "00";
+        $("#mm").textContent = "00";
+        $("#ss").textContent = "00";
+        return;
+      }
+
+      const s = Math.floor(diff/1000);
+      const days = Math.floor(s / 86400);
+      const hours = Math.floor((s % 86400) / 3600);
+      const mins = Math.floor((s % 3600) / 60);
+      const secs = s % 60;
+
+      $("#dd").textContent = pad2(days);
+      $("#hh").textContent = pad2(hours);
+      $("#mm").textContent = pad2(mins);
+      $("#ss").textContent = pad2(secs);
+    }
+
+    /**
+     * ========= AÇÕES DOS BOTÕES =========
+     */
+    function abrirWhatsApp(){
+      const txt = encodeURIComponent(convite.whatsappMensagem);
+      const url = `https://wa.me/${convite.whatsappNumero}?text=${txt}`;
+      window.open(url, "_blank");
+    }
+
+    function abrirInformacoes(){
+      window.location.href = "informacoes.html";
+    }
+
+    /**
+     * ========= MORANGOS FLUTUANDO =========
+     */
+    function createStrawberry(){
+      const svg = `
+        <svg width="40" height="40" viewBox="0 0 64 64">
+          <defs>
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+          <path d="M32 12c10 0 18 8 18 18 0 18-18 32-18 32S14 48 14 30c0-10 8-18 18-18z"
+                fill="#ff3974" filter="url(#shadow)"/>
+          <path d="M22 14c8 8 18 8 26 0" stroke="#4caf50" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="24" cy="34" r="2" fill="#ffe7b8"/>
+          <circle cx="34" cy="40" r="2" fill="#ffe7b8"/>
+          <circle cx="40" cy="30" r="2" fill="#ffe7b8"/>
+        </svg>
+      `;
+
+      const div = document.createElement("div");
+      div.className = "strawberry";
+      div.innerHTML = svg;
+
+      // Posição horizontal aleatória
+      div.style.left = Math.random() * 100 + "%";
+
+      // Duração aleatória (8-15s)
+      const duration = 8 + Math.random() * 7;
+      div.style.setProperty("--duration", duration + "s");
+
+      // Delay aleatório
+      div.style.animationDelay = -Math.random() * duration + "s";
+
+      // Tamanho aleatório
+      const scale = 0.6 + Math.random() * 0.6;
+      div.style.transform = `scale(${scale})`;
+
+      return div;
+    }
+
+    function spawnStrawberries(){
+      const container = $("#strawberries");
+      const count = 12; // 12 morangos
+
+      for(let i = 0; i < count; i++){
+        container.appendChild(createStrawberry());
+      }
+    }
+
+    /**
+     * ========= MÚSICA DE FUNDO =========
+     */
+    const bgMusic = $("#bgMusic");
+    const musicControl = $("#musicControl");
+    const musicIcon = musicControl.querySelector(".music-icon");
+    let isPlaying = false;
+
+    // Tentar tocar automaticamente
+    function tryPlayMusic(){
+      bgMusic.play()
+        .then(() => {
+          isPlaying = true;
+          musicIcon.textContent = "🔊";
+          musicControl.classList.remove("paused");
+        })
+        .catch(() => {
+          // Se autoplay falhar (política do navegador), usuário precisa clicar
+          isPlaying = false;
+          musicIcon.textContent = "🔇";
+          musicControl.classList.add("paused");
+        });
+    }
+
+    // Controle play/pause
+    musicControl.addEventListener("click", () => {
+      if(isPlaying){
+        bgMusic.pause();
+        musicIcon.textContent = "🔇";
+        musicControl.classList.add("paused");
+        isPlaying = false;
+      }else{
+        bgMusic.play();
+        musicIcon.textContent = "🔊";
+        musicControl.classList.remove("paused");
+        isPlaying = true;
+      }
+    });
+
+    /**
+     * ========= INICIALIZAÇÃO =========
+     */
+    setText();
+    tick();
+    setInterval(tick, 1000);
+    spawnStrawberries();
+
+    // Tentar tocar música ao carregar
+    setTimeout(tryPlayMusic, 500);
+
+    // Event listeners
+    $("#btnRsvp").addEventListener("click", abrirWhatsApp);
+    $("#btnInfo").addEventListener("click", abrirInformacoes);
+  </script>
+</body>
+</html>
